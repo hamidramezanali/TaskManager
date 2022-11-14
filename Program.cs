@@ -59,7 +59,7 @@ namespace MyNamespace
         private static void StartProcessing(string? name, string fullPath)
         {
             var processToStart = ConfigurationManager.AppSettings.Get("processToStart");
-            var myArgument = @$"C:\Users\hamid\Desktop\Advyser_Converted_Files\Danmark\617053.Dev";
+            var myArgument = @$"";
             var startInfo = new ProcessStartInfo();
             var process = new Process { StartInfo = startInfo };
 
