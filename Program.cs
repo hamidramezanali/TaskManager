@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Diagnostics;
 
-namespace MyNamespace
+namespace TaskStarter
 {
-    class MyClassCS
+    class TaskStarterForDevyser
     {
         static void Main(string[] args)
         {
@@ -58,8 +58,10 @@ namespace MyNamespace
         }
         private static void StartProcessing(string? name, string fullPath)
         {
+             Console.WriteLine($"Sequencing Finished: {name}");
             var processToStart = ConfigurationManager.AppSettings.Get("processToStart");
-            var myArgument = @$"";
+             string myArgument = ConfigurationManager.AppSettings.Get("argument");
+         
             var startInfo = new ProcessStartInfo();
             var process = new Process { StartInfo = startInfo };
 
@@ -71,20 +73,7 @@ namespace MyNamespace
             };
             process = new Process { StartInfo = startInfo };
             process.Start();
-           
-            //Console.WriteLine($"New RTLComplete Found: {fullPath}");
-            //var fileName = Path.GetFileNameWithoutExtension(fullPath);
-            //var path = Path.GetDirectoryName(fullPath);
-            //var analyzedFilePath = Path.Combine(path);
-            //var arggument = $@"";
-
-
-            //ProcessStartInfo startInfo= new ProcessStartInfo(processToStart);
-            //startInfo.Arguments = "-silent";
-            //Process z = Process.Start(startInfo);
-            //Console.WriteLine($"Organize finished: {path}");
-            //Task.Delay(5000);
-            //Console.WriteLine($"Organize finished: {fullPath}");
+            Console.WriteLine($"Organize finished: {name}");
         }
         private static void OnDeleted(object sender, FileSystemEventArgs e) =>
             Console.WriteLine($"Deleted: {e.FullPath}");
