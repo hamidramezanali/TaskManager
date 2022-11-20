@@ -37,9 +37,11 @@ namespace TaskStarter
             watcher.Filter = fileFilter;
             watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
-
+while(true){
             Console.WriteLine("Press enter to exit.");
             Console.ReadLine();
+               Console.WriteLine("No I won't Press enter to exit.");
+        }
         }
 
         private static void OnChanged(object sender, FileSystemEventArgs e)

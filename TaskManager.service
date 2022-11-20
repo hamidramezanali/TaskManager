@@ -1,0 +1,33 @@
+#[Unit]
+#Description=Task manager applications running on Ubuntu
+
+#[Service]
+#Type=notify
+#RemainAfterExit=yes
+#WorkingDirectory=/home/hamid/repos/BashCommands/
+#ExecStart=/home/hamid/repos/BashCommands/RunDot.sh
+
+#SyslogIdentifier=TaskManager-identifier
+#User=root
+
+# Move this file to /lib/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable TaskManager.service
+# sudo systemctl start TaskManager.service
+# sudo systemctl status TaskManager.service
+
+
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=My Shell Script
+
+[Service]
+#ExecStart=/bin/bash /usr/bin/RunDot.sh
+ExecStart=dotnet /var/TaskManager/TestWatcher.dll
+
+
+
+[Install]
+WantedBy=multi-user.target
