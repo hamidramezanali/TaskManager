@@ -1,9 +1,12 @@
 ﻿using App.UploadService.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace App.UploadService.Controllers
 {
-    public class BufferedFileUploadController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class BufferedFileUploadController : ControllerBase
     {
         readonly IBufferedFileUploadService _bufferedFileUploadService;
 
@@ -12,31 +15,42 @@ namespace App.UploadService.Controllers
             _bufferedFileUploadService = bufferedFileUploadService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+
 
         [HttpPost]
-        public async Task<ActionResult> Index(IFormFile file)
+        public async void Upload(IEnumerable<IFormFile> files)
         {
-            try
+            List<FileDesc> descriptions = new List<FileDesc>();
+            foreach (var file in files)
             {
-                if (await _bufferedFileUploadService.UploadFile(file))
+                try
                 {
-                    ViewBag.Message = "File Upload Successful";
+                    if (await _bufferedFileUploadService.UploadFile(file))
+                    {
+                        //"File Upload Successful"
+                        descriptions.Add( new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+                    }
+                    else
+                    {
+                        //return "File Upload Failed";
+                        descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    ViewBag.Message = "File Upload Failed";
+                    //Log ex
+                    //return "File Upload Failed";
+                    descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
                 }
             }
-            catch (Exception ex)
-            {
-                //Log ex
-                ViewBag.Message = "File Upload Failed";
-            }
-            return View();
+            //return Task.FromResult( descriptions);
         }
+    }
+
+    public class FileDesc
+    {
+        public string name { get; set; }
+        public string path { get; set; }
+        public long size { get; set; }
     }
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.QueueService", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.UploadService", "App.UploadService\App.UploadService.csproj", "{AB8DCFC7-DC84-44DC-9968-1D251BBDD5E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PWFUploader", "PWFUploader\PWFUploader.csproj", "{D484A1B9-84A9-4040-8CE6-B82EDB03186A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AB8DCFC7-DC84-44DC-9968-1D251BBDD5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8DCFC7-DC84-44DC-9968-1D251BBDD5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8DCFC7-DC84-44DC-9968-1D251BBDD5E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D484A1B9-84A9-4040-8CE6-B82EDB03186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D484A1B9-84A9-4040-8CE6-B82EDB03186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D484A1B9-84A9-4040-8CE6-B82EDB03186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D484A1B9-84A9-4040-8CE6-B82EDB03186A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
