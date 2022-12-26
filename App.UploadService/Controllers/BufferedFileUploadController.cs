@@ -17,37 +17,65 @@ namespace App.UploadService.Controllers
 
 
 
-        [HttpPost]
-        public async void Upload(IEnumerable<IFormFile> files)
-        {
-            List<FileDesc> descriptions = new List<FileDesc>();
-            foreach (var file in files)
+    //    [HttpPost]
+    //    public async void Upload(IEnumerable<IFormFile> files)
+    //    {
+    //        List<FileDesc> descriptions = new List<FileDesc>();
+    //        foreach (var file in files)
+    //        {
+    //            try
+    //            {
+    //                if (await _bufferedFileUploadService.UploadFile(file))
+    //                {
+    //                    //"File Upload Successful"
+    //                    descriptions.Add( new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+    //                }
+    //                else
+    //                {
+    //                    //return "File Upload Failed";
+    //                    descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+    //                }
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                //Log ex
+    //                //return "File Upload Failed";
+    //                descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+    //            }
+    //        }
+    //        //return Task.FromResult( descriptions);
+    //    }
+    //}
+
+    [HttpPost]
+    public async void Upload(IFormFile file)
+    {
+        List<FileDesc> descriptions = new List<FileDesc>();
+  
+            try
             {
-                try
+                if (await _bufferedFileUploadService.UploadFile(file))
                 {
-                    if (await _bufferedFileUploadService.UploadFile(file))
-                    {
-                        //"File Upload Successful"
-                        descriptions.Add( new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
-                    }
-                    else
-                    {
-                        //return "File Upload Failed";
-                        descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
-                    }
+                    //"File Upload Successful"
+                    descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
                 }
-                catch (Exception ex)
+                else
                 {
-                    //Log ex
                     //return "File Upload Failed";
                     descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
                 }
             }
-            //return Task.FromResult( descriptions);
-        }
+            catch (Exception ex)
+            {
+                //Log ex
+                //return "File Upload Failed";
+                descriptions.Add(new FileDesc() { name = file.Name, path = string.Empty, size = 100 });
+            }
+        
+        //return Task.FromResult( descriptions);
     }
-
-    public class FileDesc
+}
+public class FileDesc
     {
         public string name { get; set; }
         public string path { get; set; }

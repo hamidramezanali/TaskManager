@@ -120,7 +120,7 @@ namespace PWFUploader
                     _files.Add(filePath);
                 }
 
-                UploadFiles(files);
+                UploadFilesSingle(files);
             }
 
             var listbox = sender as ListBox;
@@ -174,7 +174,47 @@ namespace PWFUploader
                 //Handle exceptions - file not found, access denied, no internet connection etc etc
             }
         }
+        private void UploadFilesSingle(string[] files)
+        {
+     
 
+            try
+            {
+                foreach (var file in files)
+                {
+                    ProgressMessageHandler progress = new ProgressMessageHandler();
+
+                    HttpRequestMessage message = new HttpRequestMessage();
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+                    FileStream filestream = new FileStream(file, FileMode.Open);
+                    string fileName = System.IO.Path.GetFileName(file);
+                    content.Add(new StreamContent(filestream), "file", fileName);
+                    message.Method = HttpMethod.Post;
+                    message.Content = content;
+                    message.RequestUri = new Uri("https://localhost:7054/BufferedFileUpload");
+
+                    var client = HttpClientFactory.Create(progress);
+                    client.SendAsync(message).ContinueWith(task =>
+                    {
+                        if (task.Result.IsSuccessStatusCode)
+                        {
+                            var response = task.Result.Content.ReadAsStringAsync().Result;
+                            dynamic json = JsonConvert.DeserializeObject<FileDesc>(response);
+
+                        }
+                        else
+                        {
+                        }
+                    });
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                //Handle exceptions - file not found, access denied, no internet connection etc etc
+            }
+        }
         private void HttpSendProgress(object sender, HttpProgressEventArgs e)
         {
             HttpRequestMessage request = sender as HttpRequestMessage;
