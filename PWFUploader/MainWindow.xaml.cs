@@ -120,7 +120,7 @@ namespace PWFUploader
                     _files.Add(filePath);
                 }
 
-                UploadFilesSingle(files);
+              
             }
 
             var listbox = sender as ListBox;
@@ -135,7 +135,7 @@ namespace PWFUploader
         }
         private ObservableCollection<string> _files = new ObservableCollection<string>();
 
-        private void UploadFiles(string[] files)
+        private void UploadMultiFiles(string[] files)
         {
             ProgressMessageHandler progress = new ProgressMessageHandler();
 
@@ -153,7 +153,7 @@ namespace PWFUploader
 
                 message.Method = HttpMethod.Post;
                 message.Content = content;
-                message.RequestUri = new Uri("https://localhost:7054/BufferedFileUpload");
+                message.RequestUri = new Uri("https://localhost:7054/BufferedFileUpload/MultiUpload");
 
                 var client = HttpClientFactory.Create(progress);
                 client.SendAsync(message).ContinueWith(task =>
@@ -191,7 +191,7 @@ namespace PWFUploader
                     content.Add(new StreamContent(filestream), "file", fileName);
                     message.Method = HttpMethod.Post;
                     message.Content = content;
-                    message.RequestUri = new Uri("https://localhost:7054/BufferedFileUpload");
+                    message.RequestUri = new Uri("https://localhost:7054/BufferedFileUpload/SingleUpload");
 
                     var client = HttpClientFactory.Create(progress);
                     client.SendAsync(message).ContinueWith(task =>
@@ -242,5 +242,16 @@ namespace PWFUploader
             public long size { get; set; }
         }
 
+   
+
+        private void SingleUploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            UploadFilesSingle(_files.ToArray());
+        }
+
+        private void MultiUploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            UploadMultiFiles(_files.ToArray());
+        }
     }
 }
