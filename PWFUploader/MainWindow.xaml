@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:PWFUploader"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="FilwRowTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text="{Binding  path}"/>
+                <TextBlock Text="{Binding status}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -15,7 +24,20 @@
         <StackPanel HorizontalAlignment="Left" Height="30" Margin="10,7,0,0" VerticalAlignment="Top" Grid.Row="0">
             <TextBlock TextWrapping="Wrap" Text="Drop your files below to upload them" FontSize="18"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding Path=Files}" Grid.Row="1" Name="DropBox" HorizontalAlignment="Left" Height="181" Margin="10,0,0,0" VerticalAlignment="Top" Width="489" AllowDrop="True" Drop="DropBox_Drop" DragOver="DropBox_DragOver" DragLeave="DropBox_DragLeave" Background="#FFE2E2E2" FontSize="10">
+        <ListBox 
+            ItemsSource="{Binding Path=Files}"
+            Grid.Row="1" Name="DropBox" 
+            HorizontalAlignment="Left" 
+            Height="181" Margin="10,0,0,0" 
+            VerticalAlignment="Top" 
+            Width="489" 
+            AllowDrop="True" 
+            Drop="DropBox_Drop" 
+            DragOver="DropBox_DragOver" 
+            DragLeave="DropBox_DragLeave" 
+            Background="#FFE2E2E2" 
+            FontSize="10"
+            ItemTemplate="{StaticResource FilwRowTemplate}">
         </ListBox>
         <StatusBar Grid.Row="2" Height="22" VerticalAlignment="Bottom">
             <StatusBar.ItemsPanel>

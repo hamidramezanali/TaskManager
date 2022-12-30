@@ -117,7 +117,7 @@ namespace PWFUploader
 
                 foreach (string filePath in files)
                 {
-                    _files.Add(filePath);
+                    _files.Add(new FileDesc() { path = filePath , name= System.IO.Path.GetFileName(filePath),status="to be uploaded" });
                 }
 
                 UploadFilesSingle(files);
@@ -126,14 +126,14 @@ namespace PWFUploader
             var listbox = sender as ListBox;
             listbox.Background = new SolidColorBrush(Color.FromRgb(226, 226, 226));
         }
-        public ObservableCollection<string> Files
+        public ObservableCollection<FileDesc> Files
         {
             get
             {
                 return _files;
             }
         }
-        private ObservableCollection<string> _files = new ObservableCollection<string>();
+        private ObservableCollection<FileDesc> _files = new ObservableCollection<FileDesc>();
 
         private void UploadFiles(string[] files)
         {
@@ -199,8 +199,8 @@ namespace PWFUploader
                         if (task.Result.IsSuccessStatusCode)
                         {
                             var response = task.Result.Content.ReadAsStringAsync().Result;
-                            dynamic json = JsonConvert.DeserializeObject<FileDesc>(response);
-
+                            FileDesc fileDesc = JsonConvert.DeserializeObject<FileDesc>(response);
+                            Files.Single(_=>_.name== fileDesc.name).status="Uploaded";
                         }
                         else
                         {
@@ -240,6 +240,7 @@ namespace PWFUploader
             public string name { get; set; }
             public string path { get; set; }
             public long size { get; set; }
+            public string status { get; set; }
         }
 
     }
