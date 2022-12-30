@@ -9,7 +9,7 @@
     <Window.Resources>
         <DataTemplate x:Key="FilwRowTemplate">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding name}"/>
+                <TextBlock Text="{Binding}"/>
                 <TextBlock Text="{Binding  path}"/>
                 <TextBlock Text="{Binding status}"/>
             </StackPanel>
