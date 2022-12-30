@@ -21,14 +21,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-       <ListView 
-            ItemsSource="{Binding Path=Files}" 
-            Grid.Row="0" Name="DropBox" 
-            HorizontalAlignment="Left" 
-           Height="200"
-            Margin="10,0,0,0" VerticalAlignment="Top" Width="489" AllowDrop="True" Drop="DropBox_Drop" DragOver="DropBox_DragOver" DragLeave="DropBox_DragLeave" Background="#FFE2E2E2" FontSize="10">
-        </ListView>
-        <StackPanel Orientation="Horizontal" 
+  <StackPanel Orientation="Horizontal" 
             HorizontalAlignment="Left" Height="30" Margin="10,7,0,0" VerticalAlignment="Top" Grid.Row="1">
             <Button x:Name="SingleUploadButton" Click="SingleUploadButton_Click"  Height="30" Content="Single upload" Background="Green" Foreground="White"/>
             <Button x:Name="MultiUploadButton" Click="MultiUploadButton_Click" Height="30" Content="Multi upload" Background="Green" Foreground="White" Margin="10,0,0,0"/>
@@ -36,7 +29,7 @@
 
         <ListBox 
             ItemsSource="{Binding Path=Files}"
-            Grid.Row="1" Name="DropBox" 
+            Grid.Row="0" Name="DropBox" 
             HorizontalAlignment="Left" 
             Height="181" Margin="10,0,0,0" 
             VerticalAlignment="Top" 
