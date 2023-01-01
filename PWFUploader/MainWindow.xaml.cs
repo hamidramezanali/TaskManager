@@ -19,6 +19,7 @@ using System.Net.Http.Handlers;
 using System.Windows.Threading;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using static System.Net.WebRequestMethods;
 
 namespace PWFUploader
 {
@@ -252,6 +253,39 @@ namespace PWFUploader
         private void MultiUploadButton_Click(object sender, RoutedEventArgs e)
         {
             UploadMultiFiles(_files.ToArray());
+        }
+
+        private void startProcessButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProgressMessageHandler progress = new ProgressMessageHandler();
+
+            HttpRequestMessage message = new HttpRequestMessage();
+            MultipartFormDataContent content = new MultipartFormDataContent();
+
+            try
+            {
+
+                message.Method = HttpMethod.Post;
+                message.Content = content;
+                message.RequestUri = new Uri("https://localhost:7054/api/ProcessManager/Start");
+
+                var client = HttpClientFactory.Create(progress);
+                client.SendAsync(message).ContinueWith(task =>
+                {
+                    if (task.Result.IsSuccessStatusCode)
+                    {
+                        var response = task.Result.Content.ReadAsStringAsync().Result;
+
+                    }
+                    else
+                    {
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                //Handle exceptions - file not found, access denied, no internet connection etc etc
+            }
         }
     }
 }

@@ -25,6 +25,8 @@
             HorizontalAlignment="Left" Height="30" Margin="10,7,0,0" VerticalAlignment="Top" Grid.Row="1">
             <Button x:Name="SingleUploadButton" Click="SingleUploadButton_Click"  Height="30" Content="Single upload" Background="Green" Foreground="White"/>
             <Button x:Name="MultiUploadButton" Click="MultiUploadButton_Click" Height="30" Content="Multi upload" Background="Green" Foreground="White" Margin="10,0,0,0"/>
+
+            <Button x:Name="startProcessButton" Click="startProcessButton_Click"  Height="30" Content="Start processing" Background="Green" Foreground="White" Margin="10,0,0,0"/>
         </StackPanel>
 
         <ListBox 

@@ -1,10 +1,12 @@
 using App.UploadService.Interface;
 using App.UploadService.Service;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
+var builder = WebApplication.CreateBuilder();
+builder.Host.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddConsole();
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
